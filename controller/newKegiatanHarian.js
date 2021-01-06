@@ -23,12 +23,15 @@ exports.createKegiatan = (body) =>
 
 exports.listKegiatan = (_id, tgl) =>
   new Promise((resolve, reject) => {
+      const newDate = new Date(tgl)
+      const mulai = new Date(tgl);
+      const tglSelesai = new Date(newDate.setDate(newDate.getDate() + 1))
     model
       .aggregate([
         {
           $match: {
             ID_Peg: _id,
-            created_at : { "$gte" : new Date(tgl) }
+            created_at : {"$gte": mulai, "$lte": tglSelesai}
           },
         },
         {
@@ -50,7 +53,10 @@ exports.listKegiatan = (_id, tgl) =>
 
   exports.listKegiatanBawahan = (_id, tgl) =>
   new Promise((resolve, reject) => {
-    model.find({"atasan.ID_Peg" : _id, created_at : {"$gte": new Date(tgl)}})
+      const newDate = new Date(tgl)
+      const mulai = new Date(tgl);
+      const tglSelesai = new Date(newDate.setDate(newDate.getDate() + 1))
+    model.find({"atasan.ID_Peg" : _id, created_at : {"$gte": mulai, "$lte": tglSelesai}})
     .sort({_id : -1})
       .then((result) => {
         resolve(requestResponse.common_success_with_data(result));

@@ -22,12 +22,13 @@ const options = {
 
 var knex = require("knex")({
   client: "mysql",
-  connection: {
-    host: "localhost",
-    user: "root",
-    password: "",
-    database: "db_bkd",
-  },
+  connection: configSQL,
+  //   {
+  //   host: "localhost",
+  //   user: "root",
+  //   password: "",
+  //   database: "db_bkd",
+  // },
   // connection: {
   //   host: "103.18.117.52",
   //   user: "simpedu_db_other_srv",

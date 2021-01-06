@@ -24,7 +24,8 @@ const mongoSchema = mongoose.Schema({
 		lat : String,
 		lng : String,
 	},
-	angkaKredit : String ,
+	angkaKredit : String,
+	kodeUnitKerja: String,
 	created_at: {type:Date , default: new moment().toISOString()},
 	update_at: {type:Date , default: new moment().toISOString()}
 });
